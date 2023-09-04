@@ -1,6 +1,7 @@
 from turtle import Turtle, Screen
 from paddle import Paddle
 from ball import Ball
+import time
 
 screen = Screen()
 r_paddle = Paddle((350, 0))
@@ -20,5 +21,9 @@ is_game_on = True
 while is_game_on:
     screen.update()
     ball.move()
+    time.sleep(0.1)
+    if ball.ycor() > 300 or ball.ycor() < -300:
+       ball.bounce()
+
 
 screen.exitonclick()
