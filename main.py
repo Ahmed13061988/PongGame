@@ -19,5 +19,6 @@ screen.onkey(l_paddle.down, "s")
 is_game_on = True
 while is_game_on:
     screen.update()
+    ball.move()
 
 screen.exitonclick()
