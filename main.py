@@ -3,10 +3,13 @@ from paddle import Paddle
 from ball import Ball
 import time
 
+from scoreboard import ScoreBoard
+
 screen = Screen()
 r_paddle = Paddle((350, 0))
 l_paddle = Paddle((-350, 0))
 ball = Ball()
+score = ScoreBoard()
 screen.setup(width=800, height=600)
 screen.bgcolor("black")
 screen.title("Pong")
@@ -26,8 +29,16 @@ while is_game_on:
         ball.bounce_y()
     if (ball.distance(r_paddle) < 60 and ball.xcor() > 320) or (ball.distance(l_paddle) < 60 and ball.xcor() < -320):
         ball.bounce_x()
-    if ball.xcor() > 390 or ball.xcor() < -390:
-        is_game_on = False
-        print("Game over")
+    if ball.xcor() > 390:
+        score.score_1 += 1
+        score.clear()
+        score.updating_scoreboard()
+        ball.restart()
+    elif ball.xcor() < -390:
+        score.score_2 += 1
+        score.clear()
+        score.updating_scoreboard()
+        ball.restart()
+
 
 screen.exitonclick()
